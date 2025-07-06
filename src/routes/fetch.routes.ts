@@ -6,7 +6,6 @@ const router = express.Router();
 // import upload from "../middleware/upload";
 
 
-
 //*********** ALL APP ROUTES ***********//
 router.post("/fetch", fetchData);
 
