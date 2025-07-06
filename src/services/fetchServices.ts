@@ -26,7 +26,6 @@ class FetchServices {
   }
 }
 
-let FetchServices1 = new FetchServices("https://notifications.dailyinvoice.xyz");
-let FetchServices3 = new FetchServices("https://pay.dailyinvoice.xyz");
+// const FetchServices1 = new FetchServices("https://notifications.dailyinvoice.xyz/");
 
-export { FetchServices1, FetchServices3 };
+export { FetchServices };

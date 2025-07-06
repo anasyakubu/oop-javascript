@@ -1,31 +1,32 @@
-import { FetchServices1, FetchServices3 } from "../services/fetchServices";
+import { FetchServices } from "../services/fetchServices";
 import { Request, Response } from "express"
 
 
-const fetchData = async (req: Request, res: Response) => {
-  const { url } = req.body;
-}
+const fetchData = async (req: Request, res: Response): Promise<void> => {
 
-async function fetchAndLogData() {
   try {
-    console.log("Fetching data...");
-    const data = await FetchServices1.getData();
-    console.log("Data received:", data);
+
+    const { url } = req.body;
+
+    if (!url) {
+      res.status(400).json({ success: false, message: "URL is required" });
+      return;
+    }
+
+    const fetchServices = new FetchServices(url);
+
+    //  console.log("Fetching data from:", url); for debugging (1)
+    const data = await fetchServices.getDataName(url);
+
+
+    res.status(200).json({ success: true, data });
   } catch (error) {
-    console.error("Error in fetchAndLogData:", error);
+
+    console.error("Error fetching data:", error);
+    res.status(500).json({ success: false, message: "Error fetching data", error });
   }
+
 }
 
-async function fetchAndLogDataName() {
-  try {
-    console.log("Fetching data...");
-    const data = await FetchServices1.getDataName();
-    console.log("Data received:", data);
-  } catch (error) {
-    console.error("Error in fetchAndLogData:", error);
-  }
-}
-
-fetchAndLogDataName();
-
-export { fetchData, fetchAndLogData, fetchAndLogDataName };
+// Exporting the fetchData function to be used in routes
+export { fetchData, };
