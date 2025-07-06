@@ -16,7 +16,8 @@ const fetchData = async (req: Request, res: Response): Promise<void> => {
     const fetchServices = new FetchServices(url);
 
     //  console.log("Fetching data from:", url); for debugging (1)
-    const data = await fetchServices.getDataName(url);
+    const data = await fetchServices.getData(url);
+    // const data = await fetchServices.getDataName(url);
 
 
     res.status(200).json({ success: true, data });
