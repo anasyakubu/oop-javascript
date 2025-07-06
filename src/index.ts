@@ -1,23 +1,4 @@
-// class Person {
-
-//   constructor(public name: string, public age: number) { }
-
-//   getName(): string {
-//     return this.name;
-//   }
-
-//   getAge(): number {
-//     return this.age;
-//   }
-
-// }
-
-// let Person1 = new Person("anas", 19)
-
-// console.log(Person1.getName())
-// console.log(Person1.getAge())
-
-import FetchServices1 from "./services/fetchServices";
+import { FetchServices1, FetchServices3 } from "./services/fetchServices";
 
 async function fetchAndLogData() {
   try {
@@ -29,4 +10,14 @@ async function fetchAndLogData() {
   }
 }
 
-fetchAndLogData();
+async function fetchAndLogDataName() {
+  try {
+    console.log("Fetching data...");
+    const data = await FetchServices1.getDataName();
+    console.log("Data received:", data);
+  } catch (error) {
+    console.error("Error in fetchAndLogData:", error);
+  }
+}
+
+fetchAndLogDataName();
