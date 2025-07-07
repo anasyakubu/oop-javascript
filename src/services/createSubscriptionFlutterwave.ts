@@ -4,14 +4,14 @@ import { generateCode } from "./codeGenerator";
 
 class CreateSubscriptionFlutterwave {
   private FLUTTERWAVE_API: string;
-  private FLUTTERWAVE_SECRET: string = process.env.FLUTTERWAVE_TEST_SECRET_KEY || "";
+  private FLUTTERWAVE_SECRET: string = process.env.FLW_SECRET_TEST_KEY || "";
 
 
   constructor(public plancode: string, public email: string, public name: string,
     public amount: number, public userID: string, public appID: string = "daily-invoice-app"
   ) {
     dotenv.config();
-    this.FLUTTERWAVE_API = process.env.FLUTTERWAVE_API_URL || "hhttps://api.flutterwave.com/v3";
+    this.FLUTTERWAVE_API = process.env.FLUTTERWAVE_API_URL || "https://api.flutterwave.com/v3";
   }
 
 
