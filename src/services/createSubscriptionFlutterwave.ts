@@ -23,13 +23,11 @@ class CreateSubscriptionFlutterwave {
         payment_plan: this.plancode,
         amount: this.amount,
         currency: "NGN",
-        redirect_url: `/subscription/callback`,
+        redirect_url: `https://github.com/anasyakubu`,
         customer: { email: this.email },
         meta: {
-          userID: this.userID,
-          appID: this.appID,
-          payment_plan: this.plancode,
-          type: 'subscription',
+          userID: this.userID, appID: this.appID,
+          payment_plan: this.plancode, type: 'subscription',
         },
       }, {
         headers: { Authorization: `Bearer ${this.FLUTTERWAVE_SECRET}` },
@@ -42,7 +40,6 @@ class CreateSubscriptionFlutterwave {
       throw error;
     }
   }
-
 
 }
 
