@@ -5,14 +5,14 @@ import cookieParser from "cookie-parser";
 import errorHandler from "./middleware/errorHandler";
 import cors from "cors";
 import bodyParser from 'body-parser';
-// import connection from "./config/database";
+import connection from "./config/db.config";
 import routes from "./routes/index";
 
 dotenv.config(); // to access all .env files
 const app = express();
 
 //*********** database connection ***********//
-// const connect = connection;
+const connect = connection;
 
 //console.log("Database", connect); // logout the connection
 
