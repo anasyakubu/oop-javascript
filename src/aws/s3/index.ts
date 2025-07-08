@@ -1,6 +1,4 @@
-import {
-  S3Client, PutObjectCommand, GetObjectCommand, DeleteBucketCommand,
-} from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, GetObjectCommand, DeleteBucketCommand, } from "@aws-sdk/client-s3";
 import { NodeHttpHandler } from "@aws-sdk/node-http-handler";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { CloudFrontClient, CreateInvalidationCommand, } from "@aws-sdk/client-cloudfront";
@@ -18,10 +16,7 @@ class S3Bucket {
   private AWS_CLOUDFRONT_DISTRIBUTION_NAME = process.env.AWS_CLOUDFRONT_DISTRIBUTION_NAME || "";
   private key = RandomImageName || "rand-0001";
 
-  constructor(
-    private body: any = null,
-    private ContentType: string = ""
-  ) { }
+  constructor(private body: any = null, private ContentType: string = "") { }
 
   private createS3Client() {
     return new S3Client({
@@ -31,8 +26,7 @@ class S3Bucket {
       },
       region: this.AWS_BUCKET_REGION,
       requestHandler: new NodeHttpHandler({
-        connectionTimeout: 20000,
-        socketTimeout: 20000,
+        connectionTimeout: 20000, socketTimeout: 20000,
       }),
     });
   }
@@ -43,10 +37,7 @@ class S3Bucket {
       const key = RandomImageName();
 
       const params = {
-        Bucket: this.AWS_BUCKET_NAME,
-        Key: key,
-        Body: this.body,
-        ContentType: this.ContentType,
+        Bucket: this.AWS_BUCKET_NAME, Key: key, Body: this.body, ContentType: this.ContentType,
       };
 
       const command = new PutObjectCommand(params);
@@ -54,8 +45,7 @@ class S3Bucket {
 
       return {
         message: "Upload successful",
-        key,
-        url: `https://${this.AWS_BUCKET_NAME}.s3.${this.AWS_BUCKET_REGION}.amazonaws.com/${key}`,
+        key, url: `https://${this.AWS_BUCKET_NAME}.s3.${this.AWS_BUCKET_REGION}.amazonaws.com/${key}`,
       };
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -67,9 +57,9 @@ class S3Bucket {
   async getSignedUrlForObject(key: string, expiresInSeconds = 3600) {
     const s3 = this.createS3Client();
     const command = new GetObjectCommand({
-      Bucket: this.AWS_BUCKET_NAME,
-      Key: key,
+      Bucket: this.AWS_BUCKET_NAME, Key: key,
     });
+
     return await getSignedUrl(s3, command, { expiresIn: expiresInSeconds });
   }
 
@@ -87,10 +77,7 @@ class S3Bucket {
       DistributionId: this.AWS_CLOUDFRONT_DISTRIBUTION_NAME,
       InvalidationBatch: {
         CallerReference: Date.now().toString(),
-        Paths: {
-          Quantity: paths.length,
-          Items: paths,
-        },
+        Paths: { Quantity: paths.length, Items: paths, },
       },
     });
 
@@ -101,9 +88,7 @@ class S3Bucket {
     try {
       const s3 = this.createS3Client();
 
-      const command = new DeleteBucketCommand({
-        Bucket: this.AWS_BUCKET_NAME,
-      });
+      const command = new DeleteBucketCommand({ Bucket: this.AWS_BUCKET_NAME, });
 
       const response = await s3.send(command);
 
