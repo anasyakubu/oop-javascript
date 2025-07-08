@@ -16,8 +16,12 @@ class S3Bucket {
   private AWS_BUCKET_REGION = process.env.AWS_BUCKET_REGION || "";
   private AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME || "";
   private AWS_CLOUDFRONT_DISTRIBUTION_NAME = process.env.AWS_CLOUDFRONT_DISTRIBUTION_NAME || "";
+  private key = RandomImageName || "rand-0001";
 
-  constructor(private key: string, private body: any, private ContentType: string) { }
+  constructor(
+    private body: any = null,
+    private ContentType: string = ""
+  ) { }
 
   private createS3Client() {
     return new S3Client({
