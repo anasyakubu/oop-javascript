@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import RegisterUser from "../services/registerUser";
+import LoginUser from "../services/loginServices";
 
 const registerUser = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -34,6 +35,23 @@ const registerUser = async (req: Request, res: Response): Promise<void> => {
   }
 }
 
-const login = async (req: Request, res: Response): Promise<void> => { }
+const login = async (req: Request, res: Response): Promise<void> => {
+  try {
+
+    const { username, email, phone, password } = req.body;
+
+    const login = new LoginUser(username, email, phone, password)
+
+    const result = await login.login();
+
+    res.status(200).json({
+      success: true, msg: "login sucessfully", data: result
+    })
+
+  } catch (error) {
+    console.error("Error logging user:", error);
+    res.status(500).json({ success: false, msg: "Error registering user", error });
+  }
+}
 
 export { registerUser, login }

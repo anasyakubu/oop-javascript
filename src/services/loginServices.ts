@@ -1,6 +1,6 @@
 import User from "../models/User";
 import { IUser } from "../types/User";
-import { hashPassword, comparePassword } from "../utils/helpers/auth";
+import { comparePassword } from "../utils/helpers/auth";
 import jwt from 'jsonwebtoken';
 
 class LoginUser {
@@ -10,9 +10,7 @@ class LoginUser {
   constructor(
     public username: string, email: string, public phone: string, password: string,
   ) {
-    this.email = email;
-    this.password = password;
-    this.phone = phone;
+    this.email = email; this.password = password; this.phone = phone;
   }
 
   async login() {
@@ -40,7 +38,7 @@ class LoginUser {
 
       return {
         status: true, msg: "User logged in successfully!", token: token, userID: user._id,
-        user // Optional: you might want to return some user data
+        // user // Optional: you might want to return some user data
       };
 
     } catch (error) {
