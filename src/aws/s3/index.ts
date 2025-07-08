@@ -15,8 +15,7 @@ class S3Bucket {
   private AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY || "";
   private AWS_BUCKET_REGION = process.env.AWS_BUCKET_REGION || "";
   private AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME || "";
-  private AWS_CLOUDFRONT_DISTRIBUTION_NAME =
-    process.env.AWS_CLOUDFRONT_DISTRIBUTION_NAME || "";
+  private AWS_CLOUDFRONT_DISTRIBUTION_NAME = process.env.AWS_CLOUDFRONT_DISTRIBUTION_NAME || "";
 
   constructor(private key: string, private body: any, private ContentType: string) { }
 
