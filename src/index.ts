@@ -7,6 +7,7 @@ import cors from "cors";
 import bodyParser from 'body-parser';
 import connection from "./config/db.config";
 import routes from "./routes/index";
+import pool from "./config/postgreSQL.config";
 
 dotenv.config(); // to access all .env files
 const app = express();
@@ -15,6 +16,9 @@ const app = express();
 const connect = connection;
 
 //console.log("Database", connect); // logout the connection
+
+//console.log("Database", pool); // logout the connection
+
 
 //********************** middleware **********************//
 app.use(express.json());

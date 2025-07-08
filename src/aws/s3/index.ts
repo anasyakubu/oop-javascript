@@ -104,7 +104,6 @@ class S3Bucket {
     }
   }
 
-
 }
 
 export default S3Bucket;
