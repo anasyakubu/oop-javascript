@@ -22,7 +22,7 @@ class CreateSubscriptionFlutterwave {
         tx_ref: generateCode(9),
         payment_plan: this.plancode,
         amount: this.amount,
-        currency: "NGN",
+        currency: "USD",
         redirect_url: `https://github.com/anasyakubu`,
         customer: { email: this.email },
         meta: {
